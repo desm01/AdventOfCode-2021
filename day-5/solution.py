@@ -14,7 +14,7 @@ solutionInput = """0,9 -> 5,9
 #Replace whitespace and arrow. Create a list of lists where each inner list contains a set of two co-ordinates.
 solutionInput = [element.replace(" ", "").split('->') for element in solutionInput.splitlines()] 
 
-w, h = 10, 10
+w, h = 1000, 1000
 grid = [[0 for x in range(w)] for y in range(h)] 
 
 
@@ -27,10 +27,10 @@ for element in solutionInput:
         end = int(max(left[1], right[1]))
 
         while(pointer <= end):
-            grid[pointer][int(left[0])] = 'x'
-            pointer = pointer + 1
         
-        print('Vertical')
+            grid[int(left[0])][pointer] = grid[int(left[0])][pointer] + 1
+            
+            pointer = pointer + 1
 
 
     if left[1] == right[1]:
@@ -38,11 +38,14 @@ for element in solutionInput:
         end = int(max(left[0], right[0]))
 
         while(pointer <= end):
-            grid[int(left[1])][pointer] = 'x'
-
+            grid[pointer][int(left[1])] = grid[pointer][int(left[1])] + 1
+            
             pointer = pointer + 1
 
-
+count = 0
 for row in grid:
-    print(row)
+    for a in row:
+        if a > 1:
+            count = count + 1
 
+print(count)
